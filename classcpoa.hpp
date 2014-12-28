@@ -1,9 +1,9 @@
 #import <stdlib.h>
 #import <stdio.h>
 #include <list>
-
+#include <string>
 //a changer tout els type  string et list en std::
-
+//pas compiler
 using namespace std;
 class Personne{
       std::string id;
