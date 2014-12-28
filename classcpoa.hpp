@@ -14,42 +14,18 @@ class Personne{
       std::string email;
       std::string role;
       public 
-      virtual std::string getid(){
-              return id;
-              }
-      virtual std::string getmdp(){
-              return mdp;
-              }
-      virtual std::string getNom(){
-              return nom;
-              }
-      virtual void setNom(String n){
-              nom=n;
-              }
-      virtual std::string getPrenom(){
-              return prenom;
-              }
-      virtual void setPrenom(string s){
-              prenom=s;
-              }
-      virtual std::string getAdresse(){
-              return adresse;
-              }
-      virtual void setAdresse(string s){
-              adresse=s;
-              }
-      virtual std::string getEmail(){
-              return email;
-              }
-      virtual void setEmail(string s){
-              email=s;
-              }
-      virtual std::string getRole(){
-              return role;
-              }
-      virtual void setRole(string s){
-              role=s;
-              }
+      virtual std::string getid();
+      virtual std::string getmdp();
+      virtual std::string getNom();
+      virtual void setNom(std::string n){;
+      virtual std::string getPrenom();
+      virtual void setPrenom(std::string s);
+      virtual std::string getAdresse();
+      virtual void setAdresse(std::string s);
+      virtual std::string getEmail();
+      virtual void setEmail(std::string s);
+      virtual std::string getRole();
+      virtual void setRole(std::string s);
       };
  class Administrateur : public Personne{
 
@@ -66,15 +42,15 @@ class Personne{
       virtual std::string getid();
       virtual std::string getmdp();
       virtual std::string getNom();
-      virtual setNom(String n);
+      virtual setNom(std::string n);
       virtual getPrenom();
-      virtual setPrenom(string s);
+      virtual setPrenom(std::string s);
       virtual getAdresse();
-      virtual setAdresse(string s);
+      virtual setAdresse(std::string s);
       virtual getEmail();
-      virtual setEmail(string s);
+      virtual setEmail(std::string s);
       virtual getRole();
-      virtual setRole(string s);
+      virtual setRole(std::string s);
       };
       
 class Etudiant : public Personne{
@@ -93,20 +69,20 @@ class Etudiant : public Personne{
            virtual string getid();
       virtual string getmdp();
       virtual getNom();
-      virtual void setNom(String n);
+      virtual void setNom(std::tring n);
       virtual getPrenom();
-      virtual setPrenom(string s);
+      virtual setPrenom(std::string s);
       virtual getAdresse();
-      virtual setAdresse(string s);
+      virtual setAdresse(std::string s);
       virtual getEmail();
-      virtual setEmail(string s);
+      virtual setEmail(std::string s);
       virtual getRole();
-      virtual setRole(string s);
+      virtual setRole(std::string s);
       };
 class Enseignant : public Personne{
       std::list<Cours> lc;
       public
-      void Enseignant(string id, string mdp, string nom, string prenom, string adresse, string email){
+      void Enseignant(std::string id, std::string mdp, std::string nom, std::string prenom, std::string adresse, std::string email){
            p.id=id;
            p.mdp=mdp;
            p.setNom(nom);
@@ -116,55 +92,49 @@ class Enseignant : public Personne{
            p.setRole("Enseignant");
            lc=std::list<Cours>();
            }
-            virtual string getmdp();
+            virtual std::string getmdp();
       virtual getNom();
-      virtual void setNom(String n);
+      virtual void setNom(std::string n);
       virtual getPrenom();
-      virtual setPrenom(string s);
+      virtual setPrenom(std::string s);
       virtual getAdresse();
-      virtual setAdresse(string s);
+      virtual setAdresse(std::string s);
       virtual getEmail();
-      virtual setEmail(string s);
+      virtual setEmail(std::string s);
       virtual getRole();
-      virtual setRole(string s);
+      virtual setRole(std::string s);
       };
 class Systeme{
-      boolean authentification;
+      int authentification;
       Personne p;
       std::list<Personne> lp;
       std::list<Cours> lc;
       public 
-      void Systeme(){
-           //il faudra coder en dure ici pour peupler la lide des personne pour se ocnnecter
-           lp=std::list<Personne>();
-           lc=std::list<Cours>();
-           }
-      void authentifier(string id, string mdp);
-      int getId(string nom);
-      boolean estauthentifier();
-      Personne getutilisateur(){
-               return p;
-               }
-      void AjouterCours(string nom,int id, date datedebut, date datefin, date datefininscription, Enseignant e);
+      void Systeme();
+      void authentifier(std::string id, std::string mdp);
+      int getId(std::string nom);
+      int estauthentifier();
+      Personne getutilisateur();
+      void AjouterCours(std::string nom,int id, date datedebut, date datefin, date datefininscription, Enseignant e);
       void AjouterFichier(File f, Cours c);
-      void AjouterURL(String titre, String nom, Cours c);
-      void AjouterDevoir(String s, Date d, Cours c, String nom);
-      boolean VerifierFichier(File f,Cours c);
-      Cours RechercheCours(String nom);
-      boolean VerifierCours(String s);
-      list<Cours> ListCours();
-      void notifier(Cours c, string nom);
-      void notifier(Etudiant e, String s);
-      void notifierEnseignant(Enseignant e,String s);
-      void envoyermail(Personne p, String s);
-      list<Ressource> AfficherRessource(Cours c);
+      void AjouterURL(std::string titre, std::tring nom, Cours c);
+      void AjouterDevoir(std::string s, Date d, Cours c, std::string nom);
+      int VerifierFichier(File f,Cours c);
+      Cours RechercheCours(std::string nom);
+      boolean VerifierCours(std::string s);
+      std::list<Cours> ListCours();
+      void notifier(Cours c, std::string nom);
+      void notifier(Etudiant e, std::string s);
+      void notifierEnseignant(Enseignant e,std::string s);
+      void envoyermail(Personne p, std::string s);
+      std::list<Ressource> AfficherRessource(Cours c);
       void deposerDevoir(Cours c, Fichier f, Devoir d);
-      list<Note> ConsulterNotes(Cours c);
-      list<Note> ConsulterNotes(Devoir d, Cours c);
+      std::list<Note> ConsulterNotes(Cours c);
+      std::list<Note> ConsulterNotes(Devoir d, Cours c);
       Note ConsulterNotes(Cours c, Devoir d);
       void NoterDevoir(Devoir d, Cours c, Etudiant e, int i, int j);
-      String getrole();
-      list<Cours> CoursenAttente();
+      std::string getrole();
+      std::list<Cours> CoursenAttente();
       void autoriserCours(Cours c);
       void refuserCorus(Cours c);
       void inscription(Cours c);
@@ -173,112 +143,108 @@ class Systeme{
       void AjoutCours(Cours c);
       void AjoutreRessource(Cours c, Ressource r);
       void PublierNote(Devoir d, Cours c);
-      list<Cours> CoursAccepter();
+      std::list<Cours> CoursAccepter();
       verifierRendu(Cours c, Devoir d, Etudiant e);
       Rendu getRendu(Corus c, Devoir d, Etudiant e);
-      boolean verifierDate(Cours c);
-      recherchedevoir(Cours c, string s, Etudiant e);
+      int verifierDate(Cours c);
+      recherchedevoir(Cours c, std::string s, Etudiant e);
       };
       
 class Cours{
-      String nom;
-      boolean enattente;
-      boolean ouvert;
+      std::string nom;
+      int enattente;
+      int ouvert;
       date date_debut;
       date date_fin;
       date date_inscription ;
       int place;
-      boolean valider;
-      list<Ressource> ressource;
+      int valider;
+      std::list<Ressource> ressource;
       public
-      Cours(String n,int i,date dd, date df,Enseignant e);
-      string getNom();
-      void setNom(String s);           }
-      boolean isEnattente();
-      void setEnattente(boolean b);
-      boolean isOuvert();
-       void setOuvert(boolean b);
+      Cours(std::string n,int i,date dd, date df,Enseignant e);
+      std::string getNom();
+      void setNom(std::string s);           }
+      int isEnattente();
+      void setEnattente(int b);
+      int isOuvert();
+       void setOuvert(int b);
        date getDate_debut();
        void setDate_debut(date dd);
        date getDate_fin();
        void setDate_fin(date df);
-       list<Etudiant> getParticipant();
-       void setParticipant(list<Etudiant> le);
-       list<Ressource> getRessource();
-       void setRessource(list<Ressource> lr);
+       std::list<Etudiant> getParticipant();
+       void setParticipant(std::list<Etudiant> le);
+       std::list<Ressource> getRessource();
+       void setRessource(std::list<Ressource> lr);
        int getPlace();
        void setPlace(int i);
        Ensignant getResponsable();
        void setRespondable(Enseignant e);
-       boolean estPresent(Personne p);
+       int estPresent(Personne p);
        void AjoutFichier(File f);
-       void AjoutURL[string nom, string url);
-       void creerDevoir(String nom, string sujet, date fin);
+       void AjoutURL[std::string nom, std::string url);
+       void creerDevoir(std::string nom, std::string sujet, date fin);
        int chercherDevoir(Devoir d);
        void DeposeDevoir(Etudiant e,Fichier f, Devoir d);
-       list<Rendu> Consultertoutesnotes();
+       std::list<Rendu> Consultertoutesnotes();
        Note Consulternotes(Devoir d, Personne p);
        void NoterDevoir(Devoir d, int note, int baremme, Etudiant e);
        int ChercherEtudiant(Etudiant e);
-       boolean estlisteattente(Etudiant e);
+       int estlisteattente(Etudiant e);
        int placelisteattente[Etudiant e);
        void setValider(boolean b);
        void supprimerattente();
-       boolean CoursfermeeInscription();
+       int CoursfermeeInscription();
        void inscrire(Personne p);
        void desincrire(Perosnne p);
-       boolean verifierDate();
+       int verifierDate();
        void Ajouterressource(Ressource r);
        Ressource rechercheRessource(Ressource r);
-       boolean verifierRessource(Ressource r);
+       int verifierRessource(Ressource r);
        void publierNote(Devoir d);
-       list<Note> Consulternotes(Devoir d);
-       boolean VerifierRendu(Devoir dn Etudiant e);
+       std::list<Note> Consulternotes(Devoir d);
+       int VerifierRendu(Devoir dn Etudiant e);
        Rendu GetRendu(Devoir d, Etudiant e);
-       Devoir recherchedevoir(String,Etudiant);
+       Devoir recherchedevoir(std::string s, Etudiant e);
        };
 class Ressource{
-      string nom;
-      string type;
+      std::string nom;
+      std::string type;
       public
-      virtual string getnom(){
-              return nom;
-              }
-      virtual getTypeRessource(){
-              return type;
-              }
+      virtual std::string getnom();
+      virtual std::string getTypeRessource();
       };
       
 class URL : public Ressource{
-      string lien;
+      std::string lien;
       public 
-      void URL(String nom, String url);
-      virtual String getnom();
-      virtual String getTypeRessource();
+      void URL(std::string nom, std::string url);
+      virtual std::string getnom();
+      virtual std::string getTypeRessource();
       };
 class Fichier : public Ressource{
       File fichier;
       public
       void Fichier(File f);
-      virtual String getnom();
-      virtual String getTypeRessource();
+      virtual std::string getnom();
+      virtual std::string getTypeRessource();
       };
       
 class Devoir : public Ressource{
       date datefin;
-      string sujet;
-      boolean affichenote;
-      liste<Rendu> rendu;
+      std::string sujet;
+      int affichenote;
+      std::liste<Rendu> rendu;
       public 
-      void Devoir(String nom, date fin, string sujet);
+      void Devoir(std::string nom, date fin, std::string sujet);
       void RendreDevoir(Fichier f, Etudiant e);
       void NoteDevoir(Etudiant e, int note, int bareme);
       void publierNote();
-      liste<Rendu> affichernotes();
-      virtual string getnom();
-      virtual string getTypeRessource();
+      std::liste<Rendu> affichernotes();
+      virtual std::string getnom();
+      virtual std::string getTypeRessource();
       Note affichernotes(Etudiant p);
-      boolean verifierrendu(Etudiant e);
+      int verifierrendu(Etudiant e);
       Rendu getRendu(Etudiant e);
       };
 class Rendu{
