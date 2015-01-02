@@ -154,6 +154,7 @@ class Cours{
       std::string nom;
       int enattente;
       int ouvert;
+	Enseignant responsable;
       date date_debut;
       date date_fin;
       date date_inscription ;
@@ -193,7 +194,7 @@ class Cours{
        int ChercherEtudiant(Etudiant e);
        int estlisteattente(Etudiant e);
        int placelisteattente[Etudiant e);
-       void setValider(boolean b);
+       void setValider(int b);
        void supprimerattente();
        int CoursfermeeInscription();
        void inscrire(Personne p);
@@ -204,7 +205,7 @@ class Cours{
        int verifierRessource(Ressource r);
        void publierNote(Devoir d);
        std::list<Note> Consulternotes(Devoir d);
-       int VerifierRendu(Devoir dn Etudiant e);
+       int VerifierRendu(Devoir d, Etudiant e);
        Rendu GetRendu(Devoir d, Etudiant e);
        Devoir recherchedevoir(std::string s, Etudiant e);
        };
@@ -245,8 +246,9 @@ class Devoir : public Ressource{
       virtual std::string getnom();
       virtual std::string getTypeRessource();
       Note affichernotes(Etudiant p);
-      int verifierrendu(Etudiant e);
+      int verifierRendu(Etudiant e);
       Rendu getRendu(Etudiant e);
+	int estpublier();
       };
 class Rendu{
       Etudiant redacteur;

@@ -359,22 +359,38 @@ void Cours::DeposerDevoir(Etudiant e, Fichier f, Devoir d){
 }
 list<Note> Cours::Consultertoutesnotes(){
 	list<Note> res;
+	list<Devoir> d;
 	list<Ressource> tmp(ressource);
+	list<list<Rendu>> llr;
 	for(std::list<Ressource>::iterator it=tmp.begin();it!=tmp.end();++it){
-		if((*it).getTypeRessource().comapre("Devoir")){
-			res.push_front(*it);
+		if((*it).getTypeRessource().compare("Devoir")){
+			d.push_front(*it);
+		}
+	}
+	for(std::list<Devoir>::iterator it2=d.begin();it2!=d.end();++it2){
+		llr.push_front((*it).afficherNoter());
+	}
+	for(std::list<list<Rendu>>::iterator it3=llr.begin();it3!=llr.end();++it3){	
+		if((*it3).estpublier(){
+			for(std::list<Rendu>::iterator it4=(*it3).begin();it4!=(*it3).end();++it4){
+			res.push_front((*it4).getNote());
+			}
 		}
 	}
 	delete(tmp);
+	delete(llr);
+	delete(d);
 	return res;
 }
 Note Cours::Consulternotes(Devoir d, Personne p){
 	Note res;
 	list<Ressource> tmp(ressource);
+	if(d.estpublier()){
 	for(std::list<Ressource>::iterator it=tmp.begin();it!=tmp.end();++it){
 		if(*it==d){
 			res=((Devoir)*it).afficherNotes(p);
 		}
+	}
 	}
 	delete(tmp);
 	return res;
@@ -398,17 +414,133 @@ int Cours::ChercherEtudiant(Etudiant e){
 	return res;
 }
 int Cours::placelisteattente(Etudiant e){
-int res;
-list<Etudiant> tmp(participant);
-
-
-
+	int res;
+	int i=0;
+	list<Etudiant> tmp(participant);
+	for(std::list<Etudiant>::iterator it=tmp.begin();it!=tmp.end();++it){
+		i++;
+		if(*it==e){
+			if((i-place)<0){
+				res=0;
+			}else{
+		res=i-place;
+			}
+		}	
+	}
+	return res;
 }
+
 int Cours::estlisteattente(Etudiant e){
 list<Personne> tmp(lp);
-	int res=0;
+	enattente=1;
 	for(std::list<Personne>::iterator it=tmp.begin();it!=tmp.end();++it){
-		if(*it).){
-			res=1;
+		if(*it==e){
+			if(placelisteattente(e)<0){
+			enattente=1;
+			}
 		}
+	return enattente;
+	}
+}
+void Cours::setValider(int e){
+	this.valider=e;
+}
+void Cours::supprimerattente(){
+enattente=0;
+}
+int Cours::CoursfermeeInscription(){
+
+}
+void Cours::inscrire(Personne p){
+	participant.push_back((Etudiant)p);
+}
+
+void Cours::desinscrire(Personne p){
+	participant.erase((Etudiant)p);
+}
+
+int Cours::verfierDate(){
+
+}
+
+void Cours::Ajouterressource(Ressource r){
+	ressource.push_front(r);
+}
+
+Ressource Cours::rechercheRessource(Ressource r){
+	list<Ressource> tmp(ressource);
+	Ressource res;
+	for(std::list<Ressource>::iterator it=tmp.begin();it!=tmp.end();++it){
+		if(*it==r){
+		res=*it;
+		}
+	}
 	return res;
+}
+
+int Cours::verifierRessource(Ressource r){
+list<Ressource> tmp(ressource);
+	int res=0;
+	for(std::list<Ressource>::iterator it=tmp.begin();it!=tmp.end();++it){
+		if(*it==r){
+		res=1;
+		}
+	}
+	return res;
+}
+
+void Cours::publierNote(Devoir d){
+	d.publierNote();
+}
+
+list<Note> Cours::ConsulterNote(Devoir d){
+	list<Note> res;
+	list<Ressource> tmp(ressource);
+	list<Rendu> lr;
+	if(d.estpublier){
+		for(std::list<Ressource>::iterator it=tmp.begin();it!=tmp.end();++it){
+			if(*it==d){
+			lr=d.affichernote();
+			}
+		}
+		for(std::list<Rendu>::iterator it2=lr.begin();it2!=tlr.end();++it2){
+			res=(*it).getNote();
+		}
+	}
+	return res;
+}
+
+int Cours::verifierRendu(Devoir d, Etudiant e){
+return d.verifierRendu(e);
+}
+Rendu  Cours::getRendu(Devoir d, Etudiant e){
+return d.getRendu(e);
+}
+
+Devoir Cours::rechercheDevoir(string s, Etudiant e){
+	list<Ressource> tmp(ressoruce);
+	list<Devoir> ld;
+	int res=0;
+	for(std::list<Ressource>::iterator it=tmp.begin();it!=tmp.end();++it){
+		if((*it).getTypeRessource.compare("Devoir"){
+			ld.push(*it);
+		}
+	}
+	for(std::list<Devoir>::iterator it2=ld.begin();it2!=ld.end();++it2){
+		if((*it2).getNom().compare(s)){
+		res=1;
+		}
+	}
+	return res;
+}
+
+
+
+
+
+
+
+
+
+
+
