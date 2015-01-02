@@ -117,11 +117,11 @@ class Systeme{
       Personne getutilisateur();
       void AjouterCours(std::string nom,int id, date datedebut, date datefin, date datefininscription, Enseignant e);
       void AjouterFichier(File f, Cours c);
-      void AjouterURL(std::string titre, std::tring nom, Cours c);
+      void AjouterURL(std::string titre, std::string nom, Cours c);
       void AjouterDevoir(std::string s, Date d, Cours c, std::string nom);
       int VerifierFichier(File f,Cours c);
       Cours RechercheCours(std::string nom);
-      boolean VerifierCours(std::string s);
+      int VerifierCours(std::string s);
       std::list<Cours> ListCours();
       void notifier(Cours c, std::string nom);
       void notifier(Etudiant e, std::string s);
@@ -182,11 +182,11 @@ class Cours{
        void setRespondable(Enseignant e);
        int estPresent(Personne p);
        void AjoutFichier(File f);
-       void AjoutURL[std::string nom, std::string url);
+       void AjoutURL(std::string nom, std::string url);
        void creerDevoir(std::string nom, std::string sujet, date fin);
        int chercherDevoir(Devoir d);
        void DeposeDevoir(Etudiant e,Fichier f, Devoir d);
-       std::list<Rendu> Consultertoutesnotes();
+       std::list<Note> Consultertoutesnotes();
        Note Consulternotes(Devoir d, Personne p);
        void NoterDevoir(Devoir d, int note, int baremme, Etudiant e);
        int ChercherEtudiant(Etudiant e);
