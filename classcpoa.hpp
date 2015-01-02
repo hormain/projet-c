@@ -213,23 +213,27 @@ class Ressource{
       std::string nom;
       std::string type;
       public
-      virtual std::string getnom();
-      virtual std::string getTypeRessource();
+      virtual std::string getnom(){
+	return nom;
+	}
+      virtual std::string getTypeRessource(){
+	return type;
+	}
       };
       
 class URL : public Ressource{
       std::string lien;
       public 
       void URL(std::string nom, std::string url);
-      virtual std::string getnom();
-      virtual std::string getTypeRessource();
+      getnom();
+      getTypeRessource();
       };
 class Fichier : public Ressource{
       File fichier;
       public
       void Fichier(File f);
-      virtual std::string getnom();
-      virtual std::string getTypeRessource();
+      getnom();
+      getTypeRessource();
       };
       
 class Devoir : public Ressource{
@@ -243,8 +247,8 @@ class Devoir : public Ressource{
       void NoteDevoir(Etudiant e, int note, int bareme);
       void publierNote();
       std::liste<Rendu> affichernotes();
-      virtual std::string getnom();
-      virtual std::string getTypeRessource();
+      getnom();
+      getTypeRessource();
       Note affichernotes(Etudiant p);
       int verifierRendu(Etudiant e);
       Rendu getRendu(Etudiant e);
