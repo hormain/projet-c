@@ -159,6 +159,7 @@ class Cours{
       date date_inscription ;
       int place;
       int valider;
+	 std::list<Etudiant> participant;
       std::list<Ressource> ressource;
       public
       Cours(std::string n,int i,date dd, date df,Enseignant e);

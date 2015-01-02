@@ -40,6 +40,8 @@ return this.role;
 void Personne:: setRole(string s){
 this.role=s;
 }
+//classe systeme 
+
 void Systeme::Systeme(){
 authentification=0;
 p=0;
@@ -112,7 +114,7 @@ void Systeme::AjouterDevoir(string s, Date d, Cours c, string nom){
 
 	}
 }
-int VerifierFichier(File f, Cours c){
+int Systeme::VerifierFichier(File f, Cours c){
 	list<Cours> tmp=new list(lc);
 	for(std::list<Cours>::iterator it=tmp.begin();it!=tmp.end();++it){
 		if(*it==c){
@@ -162,7 +164,7 @@ void Systeme::notifier(Etudiant e, string s){
 void Systeme:: notifierEnseignant(Enseignant e, string s){
 	envoyermail(e,s);
 }
-void envoyermail(Personne p, string s){
+void Systeme::envoyermail(Personne p, string s){
 //fonction magique
 }
 list<Ressource> Systeme::AfficherRessource(Cours c){
@@ -248,6 +250,143 @@ Rendu Systeme::getRendu(Cours c, Devoir d, Etudiant e){
 Devoir Systeme::rechercheDevoir(Cours c, string nom, Etudiant e){
 	return c.recherchedevoir(nom,e);
 }
+//classe cours
+
+void Cours(string nom,int pl,date debut,date fin,date inscription,Enseignant responsable){
+this.nom=nom;
+enattente=1;
+ouvert=0;
+date_debut=debut;
+date_fin=fin;
+date_inscription=inscription;
+this.place=pl;
+valider=0;
+}
+string Cours::getnom(){
+return nom;
+}
+void Cours::setNom(string s){
+this.nom=s;
+}
+int Cours::isEnattente(){
+return this.enattente;
+}
+void Cours::setEnattente(int i){
+this.enattente=i;
+}
+int Cours::isOuvert(){
+return this.isouvert;
+}
+void Cours::setOuvert(int i){
+this.isouvert=i;
+}
+date Cours::getDate_debut(){
+return this.date_debut;
+}
+
+void Cours::setDate_debut(date dd){
+this.date_debut=dd;
+}
+date Cours::getDate_fin(){
+return date_fin;
+}
+void Cours::setDate_fin(date df){
+this.date_fin=df;
+}
+list<Etudiant> Cours::getParticipant(){
+return this.participant;
+}
+void Cours::setParticipant(list<Etudiant> e){
+participant=e;
+}
+list<Ressource> Cours::getRessource(){
+return ressource;
+}
+void Cours::setRessource(list<Ressource> r){
+ressource=r;
+}
+int Cours::getplace(){
+return place;
+}
+void Cours::setPlace(int i){
+place=i;
+}
+Enseignant Cours::getResponsable(){
+return this.responsable;
+}
+void Cours::setresponsable(){Enseignant e){
+this..responsable=e;
+}
+int Cours::estPresent(Etudiant e){
+	list<Etudiant> tmp(participant);
+	int res=0;
+	for(std::list<Etudiant>::iterator it=tmp.begin();it!=tmp.end();++it){
+		if(*it==e){
+			res=1;
+		}
+	}
+	return res;
+}
+void Cours::AjoutFichier(File f){
+	Fichier fi=new Fichier(f);
+	ressource.push_front(fi);
+}
+void Cours::AjoutUrl(string s,string u){
+	URL ul=new URL(s,u);
+	ressource.push_front(ul);
+}
+void Cours::creerDevoir(string nom, string sujet, date fin){
+Devoir d=new Devoir(nom, fin, sujet){
+ressource.push_front(d);
+}
+int Cours::chercherDevoir(Devoir d){
+	list<Ressource> tmp(ressource);
+	int res=0;
+	for(std::list<Ressource>::iterator it=tmp.begin();it!=tmp.end();++it){
+		if((*it==(Ressource)d){
+		res=1;
+		}
+	}
+	delete(tmp);
+	return res;
+	
+}
+void Cours::DeposerDevoir(Etudiant e, Fichier f, Devoir d){
+	int res=chercherDevoir(d);{
+	if(res){
+		d.RendreDevoir(f,e);
+	}
+}
+list<Note> Cours::Consultertoutesnotes(){
+	list<Note> res;
+	list<Ressource> tmp(ressource);
+	for(std::list<Ressource>::iterator it=tmp.begin();it!=tmp.end();++it){
+		if((*it).getTypeRessource().comapre("Devoir")){
+			res.push_front(*it);
+		}
+	}
+	delete(tmp);
+	return res;
+}
+Note Cours::Consulternotes(Devoir d, Personne p){
+	Note res;
+	list<Ressource> tmp(ressource);
+	for(std::list<Ressource>::iterator it=tmp.begin();it!=tmp.end();++it){
+		if(*it==d){
+			res=((Devoir)*it).afficherNotes(p);
+		}
+	}
+	delete(tmp);
+	return res;
+}
+void Cours noterDevoir(Devoir d, int note, int bareme, Etudiant e){
+	list<Ressource> tmp(ressource);
+	for(std::list<Ressource>::iterator it=tmp.begin();it!=tmp.end();++it){
+		if(*it==d){
+			((Devoir)*it).NoteDevoir(e,bareme,note);
+		}
+	}
+}
 
 int Cours::ChercherEtudiant(Etudiant e){
 	list<Etudiant> tmp();
@@ -257,6 +396,13 @@ int Cours::ChercherEtudiant(Etudiant e){
 			res=1;
 		}
 	return res;
+}
+int Cours::placelisteattente(Etudiant e){
+int res;
+list<Etudiant> tmp(participant);
+
+
+
 }
 int Cours::estlisteattente(Etudiant e){
 list<Personne> tmp(lp);
