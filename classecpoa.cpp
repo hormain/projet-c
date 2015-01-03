@@ -1,45 +1,55 @@
 #include "classcpoa.hpp"
 #include <iostream>
+
 using namespace std;
 string Personne::getid(){
-return this.id;
+return this->id;
 }
 
 string Personne::getmdp(){
-return this.mdp;
+return this->mdp;
 }
 
 string Personne::getNom(){
-return this.nom;
+return this->nom;
 }
 void Personne::setNom(string s){
-this.nom=s;
+this->nom=s;
 }
 string Personne::getPrenom(){
-return this.prenom;
+return this->prenom;
 }
 void Personne::setPrenom{string s){
-this.prenoms;
+this->prenoms=s;
 }
 
 string Personne::getAdresse(){
-return this.adresse;
+return this->adresse;
 }
 void Personne::setAdresse(string s){
-this.adresse=s;
+this->adresse=s;
 }
 string Personne::getEmail(){
-return this.email;
+return this->email;
 }
 void Personne::setemail(string s){
-this.email=s;
+this->email=s;
 }
 string Personne::getRole(){
-return this.role;
+return this->role;
 }
 void Personne:: setRole(string s){
-this.role=s;
+this->role=s;
 }
+
+
+
+
+
+
+
+
+
 //classe systeme 
 
 void Systeme::Systeme(){
@@ -48,26 +58,23 @@ p=0;
 
 }
 void Systeme::authentifier(string id,string mdp){
-
-//a corriger et a mettre les bonnes fonctions pour recup l'ojbet a l'endroit de la liste et le suivant de la liste
-
-	list<Personne> tmp(this.lp);
+	list<Personne> tmp(this->lp);
 		for(std::list<Personne>::iterator it=tmp.begin();it!=tmp.end();++it){
 			if(id==(*it).getid()){
 				if(mdp==(*it).getmdp()){
-				this.authentifier=1;
+				this->authentifier=1;
 				p=tmp.front();
-				}else{ printf("mdp incorecte");
+				}else{//faire un truc a l'affichage
 				}
 			}else{ 
-				pritnf("id inexistant");
+				//faire un truc a l'affichage
 			}
 		}
 		delete(tmp);
 }
 int Systeme::getId(string nom){
 	string res="id pas trouver";
-	list<Personne> tmp(this.lp);
+	list<Personne> tmp(this->lp);
 	for(std::list<Personne>::iterator it=tmp.begin();it!=tmp.end();++it){
 		if(nom=(*it).getNom()){
 		res=(*it).getId();
@@ -78,12 +85,12 @@ int Systeme::getId(string nom){
 }
 
 int Systeme::estauthentifier(){
-	return this.authentification==1;
+	return this->authentification==1;
 }
 Personne Systeme::getutilisateur(){
-	return this.p;
+	return this->p;
 }
-void Systeme::AjouterCours(std::string nom,int id, date datedebut, date datefin, date datefininscription, Enseignant e){
+void Systeme::AjouterCours(std::string nom,int id, time_t datedebut, time_t datefin, time_t datefininscription, Enseignant e){
 	Cours c=new Cours(nom,id,datedebut,datefin,datefininscription,e);
 	lc.push_front(c);
 }
@@ -104,8 +111,9 @@ void Systeme::AjouterURL(std::string titre, std::string nom, Cours c){
 		}
 
 	}
+	delete(tmp);
 }
-void Systeme::AjouterDevoir(string s, Date d, Cours c, string nom){
+void Systeme::AjouterDevoir(string s, time_t d, Cours c, string nom){
 	list<Cours> tmp(lc);
 	for(std::list<Cours>::iterator it=tmp.begin();it!=tmp.end();++it){
 		if(*it==c){
@@ -113,14 +121,18 @@ void Systeme::AjouterDevoir(string s, Date d, Cours c, string nom){
 		}
 
 	}
+	delete(tmp);
 }
 int Systeme::VerifierFichier(File f, Cours c){
 	list<Cours> tmp=new list(lc);
+	int res=0;
 	for(std::list<Cours>::iterator it=tmp.begin();it!=tmp.end();++it){
 		if(*it==c){
-			c.verifierRessource(f);
+			res=c.verifierRessource(f);
 		}
 	}
+	delete(tmp);
+	return res;
 }
 
 Cours Systeme::RechercheCours(string nom){
@@ -199,6 +211,7 @@ list<Cours> Systeme::CoursenAttente(){
 			res.push_front(*it);
 		}
 	}
+	delete(tmp);
 	return res;
 }
 void Systeme::autoriserCours(Cours c){
@@ -252,70 +265,70 @@ Devoir Systeme::rechercheDevoir(Cours c, string nom, Etudiant e){
 }
 //classe cours
 
-void Cours(string nom,int pl,date debut,date fin,date inscription,Enseignant responsable){
-this.nom=nom;
-enattente=1;
-ouvert=0;
-date_debut=debut;
-date_fin=fin;
-date_inscription=inscription;
-this.place=pl;
-valider=0;
+void Cours(string nom,int pl, time_t debut, time_t fin, time_t inscription, Enseignant responsable){
+    this.nom=nom;
+    enattente=1;
+    ouvert=0;
+    date_debut=debut;
+    date_fin=fin;
+    date_inscription=inscription;
+    this.place=pl;
+    valider=0;
 }
-string Cours::getnom(){
-return nom;
+string Cours::getnom(){          
+       return nom;
 }
 void Cours::setNom(string s){
-this.nom=s;
+     this.nom=s;
 }
 int Cours::isEnattente(){
-return this.enattente;
+    return this.enattente;
 }
 void Cours::setEnattente(int i){
-this.enattente=i;
+     this.enattente=i;
 }
 int Cours::isOuvert(){
-return this.isouvert;
+    return this.isouvert;
 }
 void Cours::setOuvert(int i){
-this.isouvert=i;
+     this.isouvert=i;
 }
-date Cours::getDate_debut(){
-return this.date_debut;
+time_t Cours::getDate_debut(){
+     return this.date_debut;
 }
 
-void Cours::setDate_debut(date dd){
-this.date_debut=dd;
+void Cours::setDate_debut(time_t dd){
+     this.date_debut=dd;
 }
-date Cours::getDate_fin(){
-return date_fin;
+time_t Cours::getDate_fin({
+     return date_fin;
 }
-void Cours::setDate_fin(date df){
-this.date_fin=df;
+void Cours::setDate_fin(time_t df){
+     this.date_fin=df;
 }
 list<Etudiant> Cours::getParticipant(){
-return this.participant;
+               return this.participant;
 }
 void Cours::setParticipant(list<Etudiant> e){
-participant=e;
+     participant=e;
 }
 list<Ressource> Cours::getRessource(){
-return ressource;
+                return ressource;
 }
-void Cours::setRessource(list<Ressource> r){
+ void Cours::setRessource(list<Ressource> r){
 ressource=r;
 }
 int Cours::getplace(){
-return place;
+    return place;
 }
 void Cours::setPlace(int i){
-place=i;
+     place=i;
 }
 Enseignant Cours::getResponsable(){
-return this.responsable;
+           return this.responsable;
 }
 void Cours::setresponsable(){Enseignant e){
-this..responsable=e;
+     this..responsable=e;
 }
 int Cours::estPresent(Etudiant e){
 	list<Etudiant> tmp(participant);
@@ -335,9 +348,9 @@ void Cours::AjoutUrl(string s,string u){
 	URL ul=new URL(s,u);
 	ressource.push_front(ul);
 }
-void Cours::creerDevoir(string nom, string sujet, date fin){
-Devoir d=new Devoir(nom, fin, sujet){
-ressource.push_front(d);
+void Cours::creerDevoir(string nom, string sujet, time_t fin){
+     Devoir d=new Devoir(nom, fin, sujet){
+     ressource.push_front(d);
 }
 int Cours::chercherDevoir(Devoir d){
 	list<Ressource> tmp(ressource);
@@ -402,6 +415,7 @@ void Cours noterDevoir(Devoir d, int note, int bareme, Etudiant e){
 			((Devoir)*it).NoteDevoir(e,bareme,note);
 		}
 	}
+	delete(tmp);
 }
 
 int Cours::ChercherEtudiant(Etudiant e){
@@ -411,6 +425,7 @@ int Cours::ChercherEtudiant(Etudiant e){
 		if(*it)==e){
 			res=1;
 		}
+	delete(tmp);
 	return res;
 }
 int Cours::placelisteattente(Etudiant e){
@@ -427,29 +442,32 @@ int Cours::placelisteattente(Etudiant e){
 			}
 		}	
 	}
+	delete(tmp);
 	return res;
 }
 
 int Cours::estlisteattente(Etudiant e){
-list<Personne> tmp(lp);
+    list<Personne> tmp(lp);
 	enattente=1;
 	for(std::list<Personne>::iterator it=tmp.begin();it!=tmp.end();++it){
 		if(*it==e){
 			if(placelisteattente(e)<0){
 			enattente=1;
 			}
-		}
-	return enattente;
-	}
+        }
+      }
+      delete(tmp);
+      return enattente;
+	
 }
 void Cours::setValider(int e){
-	this.valider=e;
+	this->valider=e;
 }
 void Cours::supprimerattente(){
-enattente=0;
+     enattente=0;
 }
 int Cours::CoursfermeeInscription(){
-
+    return datefin<std::localtime(nullptr);
 }
 void Cours::inscrire(Personne p){
 	participant.push_back((Etudiant)p);
@@ -475,6 +493,7 @@ Ressource Cours::rechercheRessource(Ressource r){
 		res=*it;
 		}
 	}
+	delete(tmp);
 	return res;
 }
 
@@ -486,6 +505,7 @@ list<Ressource> tmp(ressource);
 		res=1;
 		}
 	}
+	delete(tmp);
 	return res;
 }
 
@@ -507,6 +527,8 @@ list<Note> Cours::ConsulterNote(Devoir d){
 			res=(*it).getNote();
 		}
 	}
+	delete(tmp);
+	delete(lr);
 	return res;
 }
 
@@ -531,6 +553,7 @@ Devoir Cours::rechercheDevoir(string s, Etudiant e){
 		res=1;
 		}
 	}
+	delete(tmp);
 	return res;
 }
 
@@ -548,10 +571,95 @@ fichier=f;
 
 //class Devoir
 
+void Devoir::Devoir(string nom, time_t fin, string suj){
+    datefin=fin;
+    this.sujet=suj;
+    affichenote=0;
+}
+void Devoir::RendreDevoir(Fichier f, Etudiant e){
+    Rendu *r=new Rendu(f,e);
+    rendu.push_front(*r);
+}
+void Devoir::NoteDevoir(Etudiant e, int note, int bareme){
+	list<Rendu> tmp(rendu);
+	for(std::list<Rendu>::iterator it=tmp.begin();it!=tmp.end();++it){
+		if((*it).getEtudiant==e){
+		(*it).setNote(note);
+		(*it).setBareme(bareme);
+		}
+	}	
+	delete(tmp);
+}
+void Devoir::publierNote(){
+     affichenote=1;
+}
 
+liste<Rendu> Devoir::affichernotes(){
+             return rendu;
+}
+Note Devoir::affichernotes(Etudiant p){
+	list<Rendu> tmp(rendu);
+	Note res;
+	for(std::list<Rendu>::iterator it=tmp.begin();it!=tmp.end();++it){
+		if((*it).getEtudiant==e){
+		res=(*it).getNote();
+		}
+	}	
+	delete(tmp);
+	return res;
+}
+int Devoir::verifierRendu(Etudiant e){
+	list<Rendu> tmp(rendu);
+	int res=0;
+	for(std::list<Rendu>::iterator it=tmp.begin();it!=tmp.end();++it){
+		if((*it).getEtudiant==e){
+		res=1;
+		}
+	}	
+	delete(tmp);
+	return res;
 
+}
+Rendu Devoir::getRendu(Etudiant e){
+      list<Rendu> tmp(rendu);
+	Rendu res;
+	for(std::list<Rendu>::iterator it=tmp.begin();it!=tmp.end();++it){
+		if((*it).getEtudiant==e){
+		res=(*it)
+		}
+	}	
+	delete(tmp);
+	return res;
+}
 
+int Devoir::estpublier(){
+    return affichenote;
+}
+//class rendu 
 
+void Rendu::Rendu(Fichier fichier, Etudiant e){
+    redacteur=e;
+    f=fichier;
+    note=new Note();
+}
+Etudiant Rendu::getEtudiant(){
+         return redacteur;
+}
+void Rendu::SetNote(int n){
+     note.setNote(n);
+}
+void Rendu::setBareme(int b){
+     note.setBareme(b);
+}
+Note Rendu::getNote(){
+     return note;
+}
+int Rendu::getBareme(){
+    return note.getBareme();
+}
+Fichier Rendu::getFichier(){
+        return f;
+}
 
 
 
