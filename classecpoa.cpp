@@ -534,7 +534,19 @@ Devoir Cours::rechercheDevoir(string s, Etudiant e){
 	return res;
 }
 
+//class URL
 
+void URL::URL(string nom, string url){
+r.nom=nom;
+lien=url;
+}
+//class Fichier
+
+void Fichier::Fichier(File f){
+fichier=f;
+}
+
+//class Devoir
 
 
 
